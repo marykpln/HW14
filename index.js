@@ -1,9 +1,11 @@
 function some(array, fun) {
   let result = false;
-  for (let i = 0; i < array.length; i++) {
-    if (fun(array[i], i)) {
+  let i = 0;
+  while (i < array.length) {
+    if (fun(array[i], i) && isNaN(array[i])) {
       result = true;
     }
+    i++;
   }
   return result;
 }
@@ -16,10 +18,15 @@ function evenNumber(num) {
 
 function every(array, fun) {
   let result = true;
-  for (let i = 0; i < array.length; i++) {
-    if (fun(array[i], i) == false) {
+  let i = 0;
+  if (array.length == 0) {
+    result = false;
+  }
+  while (i < array.length) {
+    if (!fun(array[i], i)) {
       result = false;
     }
+    i++;
   }
   return result;
   //TODO
@@ -37,12 +44,12 @@ console.log(
   )} - false`
 );
 
-array = [23, "abc", 22];
+array = ["", "abc", false];
 console.log(
   `using "some" function for even numbers array: ${array}, function ${evenNumber}, result: ${some(
     array,
     evenNumber
-  )} - true`
+  )} - false`
 );
 
 console.log(
